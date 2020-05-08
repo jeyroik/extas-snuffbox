@@ -1,2 +1,3 @@
 # extas-snuffbox
-Snuffbox for Extas
+
+Snuffbox can help you to light up Extas. Relax and enjoy.

@@ -1,0 +1,12 @@
+{
+  "name": "jeyroik/extas-snuffbox",
+  "description": "Extas snuffbox",
+  "require": {
+    "slim/psr7": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "extas\\": "src/"
+    }
+  }
+}
