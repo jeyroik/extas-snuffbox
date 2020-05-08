@@ -31,7 +31,13 @@ trait TSnuffPlugins
      */
     protected function createSnuffPlugin(string $name, array $stages): void
     {
-        $repo = new PluginRepository();
+        $repo = new class extends PluginRepository {
+            public function reload()
+            {
+                parent::$stagesWithPlugins = [];
+            }
+        };
+        $repo->reload();
         foreach ($stages as $stage) {
             $repo->create(new Plugin([
                 Plugin::FIELD__CLASS => $name,
