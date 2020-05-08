@@ -18,17 +18,17 @@ use Slim\Psr7\Uri;
 trait TSnuffHttp
 {
     /**
-     * @param string $method
-     * @param string $query
-     * @param array|string[] $headers
      * @param string $streamRequestSuffix
+     * @param array|string[] $headers
+     * @param string $query
+     * @param string $method
      * @return RequestInterface
      */
     protected function getPsrRequest(
-        string $method = 'GET',
-        string $query = '',
+        string $streamRequestSuffix = '',
         array $headers = ['Content-type' => 'application/json'],
-        string $streamRequestSuffix = ''
+        string $query = '',
+        string $method = 'GET'
     ): RequestInterface
     {
         return new Request(

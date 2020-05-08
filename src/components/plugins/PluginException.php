@@ -15,6 +15,6 @@ class PluginException extends Plugin
      */
     public function __invoke(...$args)
     {
-        throw new \Exception('Expected exception');
+        throw new \Exception('Expected exception', 500);
     }
 }

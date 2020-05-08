@@ -1,6 +1,7 @@
 <?php
 namespace extas\components\extensions;
 
+use extas\components\SystemContainer;
 use extas\interfaces\extensions\IExtensionRepositoryGet;
 
 /**
@@ -22,6 +23,16 @@ trait TSnuffExtensions
             Extension::FIELD__SUBJECT => '*',
             Extension::FIELD__METHODS => $repos
         ]));
+    }
+
+    /**
+     * @param array $repos
+     */
+    protected function addReposForExt(array $repos): void
+    {
+        foreach ($repos as $interface => $class) {
+            SystemContainer::addItem($interface, $class);
+        }
     }
 
     /**
