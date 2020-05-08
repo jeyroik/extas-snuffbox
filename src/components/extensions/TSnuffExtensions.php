@@ -27,8 +27,10 @@ trait TSnuffExtensions
     /**
      * Delete ext repo
      */
-    protected function deleteRepoExt(): void
+    protected function deleteSnuffExtensions(): void
     {
-        (new ExtensionRepository())->delete([Extension::FIELD__CLASS => ExtensionRepositoryGet::class]);
+        (new ExtensionRepository())->delete([Extension::FIELD__CLASS => [
+            ExtensionRepositoryGet::class
+        ]]);
     }
 }

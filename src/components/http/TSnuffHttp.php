@@ -15,7 +15,7 @@ use Slim\Psr7\Uri;
  * @package extas\components\http
  * @author jeyroik@gmail.com
  */
-trait THttp
+trait TSnuffHttp
 {
     /**
      * @param string $method
