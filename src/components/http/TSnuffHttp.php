@@ -48,4 +48,35 @@ trait TSnuffHttp
     {
         return new Response();
     }
+
+    /**
+     * @param ResponseInterface $psrResponse
+     * @return array
+     */
+    protected function getJsonRpcResponse(ResponseInterface $psrResponse): array
+    {
+        return json_decode($psrResponse->getBody(), true);
+    }
+
+    /**
+     * @param ResponseInterface $psrResponse
+     * @param string $errorField
+     * @return bool
+     */
+    protected function isJsonRpcResponseHasError(ResponseInterface $psrResponse, string $errorField = 'error'): bool
+    {
+        $response = $this->getJsonRpcResponse($psrResponse);
+        
+        return isset($response[$errorField]);
+    }
+
+    /**
+     * @param ResponseInterface $psrResponse
+     * @param string $errorField
+     * @return bool
+     */
+    protected function isJsonRpcResponseHasNotError(ResponseInterface $psrResponse, string $errorField = 'error'): bool
+    {
+        return !$this->isJsonRpcResponseHasError($psrResponse, $errorField);
+    }
 }
