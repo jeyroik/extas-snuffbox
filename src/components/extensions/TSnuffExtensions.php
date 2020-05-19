@@ -1,6 +1,7 @@
 <?php
 namespace extas\components\extensions;
 
+use extas\components\items\SnuffRepository;
 use extas\components\SystemContainer;
 use extas\interfaces\extensions\IExtensionRepositoryGet;
 
@@ -32,6 +33,8 @@ trait TSnuffExtensions
      */
     protected function addReposForExt(array $repos): void
     {
+        $repos['snuffRepository'] = SnuffRepository::class;
+        
         foreach ($repos as $interface => $class) {
             SystemContainer::addItem($interface, $class);
         }
