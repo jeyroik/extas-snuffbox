@@ -9,6 +9,8 @@ namespace extas\components\plugins;
  */
 trait TSnuffPlugins
 {
+    protected array $snuffPluginsNames = [];
+
     /**
      * @param array $stages
      */
@@ -38,6 +40,7 @@ trait TSnuffPlugins
             }
         };
         $repo->reload();
+        $this->snuffPluginsNames[] = $name;
         foreach ($stages as $stage) {
             $repo->create(new Plugin([
                 Plugin::FIELD__CLASS => $name,
@@ -51,9 +54,6 @@ trait TSnuffPlugins
      */
     protected function deleteSnuffPlugins(): void
     {
-        (new PluginRepository())->delete([Plugin::FIELD__CLASS => [
-            PluginEmpty::class,
-            PluginException::class
-        ]]);
+        (new PluginRepository())->delete([Plugin::FIELD__CLASS => $this->snuffPluginsNames]);
     }
 }
