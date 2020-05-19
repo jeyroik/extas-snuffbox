@@ -61,7 +61,7 @@ trait TSnuffConditions
      */
     protected function getAvailableConditions(): array
     {
-        if (!empty($this->available)) {
+        if (empty($this->available)) {
             $condExtasPath = getcwd() . '/vendor/jeyroik/extas-conditions/extas.json';
             if (is_file($condExtasPath)) {
                 $condExtas = json_decode(file_get_contents($condExtasPath), true);
