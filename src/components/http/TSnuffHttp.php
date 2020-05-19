@@ -66,7 +66,7 @@ trait TSnuffHttp
     protected function isJsonRpcResponseHasError(ResponseInterface $psrResponse, string $errorField = 'error'): bool
     {
         $response = $this->getJsonRpcResponse($psrResponse);
-        
+
         return isset($response[$errorField]);
     }
 
