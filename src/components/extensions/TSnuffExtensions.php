@@ -17,6 +17,8 @@ trait TSnuffExtensions
      */
     protected function createRepoExt(array $repos): void
     {
+        $repos[] = 'snuffRepository';
+
         (new ExtensionRepository())->create(new Extension([
             Extension::FIELD__CLASS => ExtensionRepositoryGet::class,
             Extension::FIELD__INTERFACE => IExtensionRepositoryGet::class,

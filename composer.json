@@ -3,7 +3,8 @@
   "description": "Extas snuffbox",
   "require": {
     "slim/psr7": "^1.1",
-    "jeyroik/extas-repositories-get": "0.*"
+    "jeyroik/extas-repositories-get": "0.*",
+    "jeyroik/extas-conditions": "0.*"
   },
   "autoload": {
     "psr-4": {
