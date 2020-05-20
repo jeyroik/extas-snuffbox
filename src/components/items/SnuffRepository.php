@@ -15,4 +15,16 @@ class SnuffRepository extends Repository
     protected string $scope = 'extas';
     protected string $pk = 'id';
     protected string $itemClass = SnuffItem::class;
+
+    public static array $addedItems = [];
+
+    /**
+     * @param $item
+     * @return mixed
+     */
+    public function create($item)
+    {
+        self::$addedItems[] = $item;
+        return parent::create($item);
+    }
 }

@@ -29,10 +29,12 @@ trait TSnuffItems
     }
 
     /**
-     * @param array $where
+     *
      */
-    public function deleteSnuffItems(array $where): void
+    public function deleteSnuffItems(): void
     {
-        $this->snuffRepository()->delete($where);
+        foreach (SnuffRepository::$addedItems as $item) {
+            $this->snuffRepository()->delete([], $item);
+        }
     }
 }

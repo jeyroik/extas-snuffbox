@@ -34,7 +34,7 @@ trait TSnuffExtensions
     protected function addReposForExt(array $repos): void
     {
         $repos['snuffRepository'] = SnuffRepository::class;
-        
+
         foreach ($repos as $interface => $class) {
             SystemContainer::addItem($interface, $class);
         }
