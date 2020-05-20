@@ -55,5 +55,12 @@ trait TSnuffPlugins
     protected function deleteSnuffPlugins(): void
     {
         (new PluginRepository())->delete([Plugin::FIELD__CLASS => $this->snuffPluginsNames]);
+        $repo = new class extends PluginRepository {
+            public function reload()
+            {
+                parent::$stagesWithPlugins = [];
+            }
+        };
+        $repo->reload();
     }
 }
