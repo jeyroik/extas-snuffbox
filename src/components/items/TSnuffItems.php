@@ -36,5 +36,7 @@ trait TSnuffItems
         foreach (SnuffRepository::$addedItems as $item) {
             $this->snuffRepository()->delete([], $item);
         }
+
+        SnuffRepository::$addedItems = [];
     }
 }
