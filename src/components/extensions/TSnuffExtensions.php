@@ -38,6 +38,8 @@ trait TSnuffExtensions
         foreach ($repos as $interface => $class) {
             SystemContainer::addItem($interface, $class);
         }
+
+        $this->createRepoExt($repos);
     }
 
     /**
