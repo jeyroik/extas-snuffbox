@@ -39,7 +39,7 @@ trait TSnuffExtensions
             SystemContainer::addItem($interface, $class);
         }
 
-        $this->createRepoExt($repos);
+        $this->createRepoExt(array_keys($repos));
     }
 
     /**
