@@ -22,18 +22,24 @@ trait TSnuffHttp
      * @param array|string[] $headers
      * @param string $query
      * @param string $method
+     * @param string $path
+     * @param string $host
+     * @param int $port
      * @return RequestInterface
      */
     protected function getPsrRequest(
         string $streamRequestSuffix = '',
         array $headers = ['Content-type' => 'application/json'],
         string $query = '',
-        string $method = 'GET'
+        string $method = 'GET',
+        string $path = '/',
+        string $host = 'localhost',
+        int $port = 80
     ): RequestInterface
     {
         return new Request(
             $method,
-            new Uri('http', 'localhost', 80, '/', $query),
+            new Uri('http', $host, $port, $path, $query),
             new Headers($headers),
             [],
             [],
