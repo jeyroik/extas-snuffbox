@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @package extas\components\console
  * @author jeyroik <jeyroik@gmail.com>
  */
-trait TConsole
+trait TSnuffConsole
 {
     /**
      * @param array $options
