@@ -20,7 +20,7 @@ trait TSnuffConsole
      * @param array $options
      * @return InputInterface
      */
-    protected function getInput(array $options): InputInterface
+    protected function getInput(array $options = []): InputInterface
     {
         $args = [];
         $defs = [];
