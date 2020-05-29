@@ -9,13 +9,13 @@ namespace extas\components\plugins;
  */
 class PluginEmpty extends Plugin
 {
-    public static bool $worked = false;
+    public static int $worked = 0;
 
     /**
      * @param mixed ...$args
      */
     public function __invoke(...$args)
     {
-        self::$worked = true;
+        self::$worked++;
     }
 }
