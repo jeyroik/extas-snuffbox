@@ -36,6 +36,36 @@ trait TSnuffRepository
 
     /**
      * @param string $alias
+     * @param array $where
+     * @return array
+     * @throws \Exception
+     */
+    protected function allSnuffRepos(string $alias, array $where = []): array
+    {
+        if (isset($this->snuffRepos[$alias])) {
+            return $this->snuffRepos[$alias]->all($where);
+        }
+
+        throw new \Exception('Missed repo with alias "' . $alias . '"');
+    }
+
+    /**
+     * @param string $alias
+     * @param array $where
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function oneSnuffRepos(string $alias, array $where = [])
+    {
+        if (isset($this->snuffRepos[$alias])) {
+            return $this->snuffRepos[$alias]->one($where);
+        }
+
+        throw new \Exception('Missed repo with alias "' . $alias . '"');
+    }
+
+    /**
+     * @param string $alias
      * @param IItem $item
      * @return IItem
      * @throws \Exception
