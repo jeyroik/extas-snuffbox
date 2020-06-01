@@ -1,6 +1,8 @@
 <?php
 namespace extas\components\plugins;
 
+use extas\interfaces\repositories\IRepository;
+
 /**
  * Trait TSnuffPlugins
  *
@@ -33,12 +35,7 @@ trait TSnuffPlugins
      */
     protected function createSnuffPlugin(string $name, array $stages): void
     {
-        $repo = new class extends PluginRepository {
-            public function reload()
-            {
-                parent::$stagesWithPlugins = [];
-            }
-        };
+        $repo = $this->getSnuffPluginRepository();
         $repo->reload();
         $this->snuffPluginsNames[] = $name;
         foreach ($stages as $stage) {
@@ -55,13 +52,28 @@ trait TSnuffPlugins
     protected function deleteSnuffPlugins(): void
     {
         (new PluginRepository())->delete([Plugin::FIELD__CLASS => $this->snuffPluginsNames]);
-        $repo = new class extends PluginRepository {
+        $this->getSnuffPluginRepository()->reload();
+        PluginEmpty::$worked = 0;
+    }
+
+    /**
+     * Reload plugins by stages
+     */
+    protected function reloadSnuffPlugins(): void
+    {
+        $this->getSnuffPluginRepository()->reload();
+    }
+
+    /**
+     * @return IRepository
+     */
+    protected function getSnuffPluginRepository(): IRepository
+    {
+        return new class extends PluginRepository {
             public function reload()
             {
                 parent::$stagesWithPlugins = [];
             }
         };
-        $repo->reload();
-        PluginEmpty::$worked = 0;
     }
 }
