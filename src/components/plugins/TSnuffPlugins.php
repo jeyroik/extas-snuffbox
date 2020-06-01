@@ -62,5 +62,6 @@ trait TSnuffPlugins
             }
         };
         $repo->reload();
+        PluginEmpty::$worked = 0;
     }
 }
