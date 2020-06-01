@@ -62,6 +62,7 @@ trait TSnuffPlugins
     protected function reloadSnuffPlugins(): void
     {
         $this->getSnuffPluginRepository()->reload();
+        PluginEmpty::$worked = 0;
     }
 
     /**
