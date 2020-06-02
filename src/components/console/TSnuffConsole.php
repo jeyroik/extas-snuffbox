@@ -5,6 +5,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -34,10 +35,11 @@ trait TSnuffConsole
     }
 
     /**
+     * @param bool $buffered
      * @return OutputInterface
      */
-    protected function getOutput(): OutputInterface
+    protected function getOutput(bool $buffered = false): OutputInterface
     {
-        return new NullOutput();
+        return $buffered ? new BufferedOutput() : new NullOutput();
     }
 }
