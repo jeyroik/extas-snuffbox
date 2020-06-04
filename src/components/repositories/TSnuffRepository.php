@@ -2,6 +2,7 @@
 namespace extas\components\repositories;
 
 use extas\components\extensions\TSnuffExtensions;
+use extas\components\items\SnuffRepository;
 use extas\interfaces\IItem;
 use extas\interfaces\repositories\IRepository;
 
@@ -25,6 +26,8 @@ trait TSnuffRepository
      */
     protected function registerSnuffRepos(array $repos): void
     {
+        $repos['snuffRepository'] = SnuffRepository::class;
+
         foreach ($repos as $alias => $class) {
             $alias = $alias ?: $class;
             $this->snuffRepos[$alias] = new $class();
