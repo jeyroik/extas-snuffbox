@@ -39,13 +39,13 @@ class PluginExecutable extends Plugin
         foreach (self::$executes as list($execute, $returnResult)) {
             if ($returnResult) {
                 $operated = false;
-                $result = $execute($operated, ...$args);
+                $result = $execute($this, $operated, ...$args);
 
                 if ($operated) {
                     return $result;
                 }
             } else {
-                $execute(...$args);
+                $execute($this, ...$args);
             }
         }
 
