@@ -31,7 +31,9 @@ trait TSnuffRepository
         foreach ($repos as $alias => $class) {
             $alias = $alias ?: $class;
             $this->snuffRepos[$alias] = new $class();
-            $this->snuffRepos[$alias]->drop();
+            if (method_exists($this->snuffRepos[$alias], 'drop')) {
+                $this->snuffRepos[$alias]->drop();
+            }
         }
 
         $this->addReposForExt($repos);
@@ -88,7 +90,9 @@ trait TSnuffRepository
     protected function unregisterSnuffRepos(): void
     {
         foreach ($this->snuffRepos as $repo) {
-            $repo->drop();
+            if (method_exists($repo, 'drop')) {
+                $repo->drop();
+            }
         }
 
         $this->snuffRepos = [];
