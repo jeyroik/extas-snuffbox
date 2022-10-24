@@ -3,6 +3,7 @@ namespace extas\components\repositories;
 
 use extas\components\extensions\TSnuffExtensions;
 use extas\components\items\SnuffRepository;
+use extas\components\SystemContainer;
 use extas\interfaces\IItem;
 use extas\interfaces\repositories\IRepository;
 
@@ -28,9 +29,8 @@ trait TSnuffRepository
     {
         $repos['snuffRepository'] = SnuffRepository::class;
 
-        foreach ($repos as $alias => $class) {
-            $alias = $alias ?: $class;
-            $this->snuffRepos[$alias] = new $class();
+        foreach ($repos as $alias) {
+            $this->snuffRepos[$alias] = SystemContainer::getItem($alias);
             if (method_exists($this->snuffRepos[$alias], 'drop')) {
                 $this->snuffRepos[$alias]->drop();
             }
