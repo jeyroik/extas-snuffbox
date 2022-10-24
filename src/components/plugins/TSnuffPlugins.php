@@ -53,7 +53,6 @@ trait TSnuffPlugins
      */
     protected function deleteSnuffPlugins(): void
     {
-        (new PluginRepository())->delete([Plugin::FIELD__CLASS => $this->snuffPluginsNames]);
         $this->getSnuffPluginRepository()->drop();
         PluginEmpty::reset();
         PluginExecutable::reset();
