@@ -1,7 +1,6 @@
 <?php
 namespace extas\components\extensions;
 
-use extas\components\items\SnuffRepository;
 use extas\components\SystemContainer;
 use extas\interfaces\extensions\IExtensionRepositoryGet;
 
@@ -20,7 +19,9 @@ trait TSnuffExtensions
     {
         $repos[] = 'snuffRepository';
 
-        (new ExtensionRepository())->create(new Extension([
+        $repo = SystemContainer::getItem('extensions');
+
+        $repo->create(new Extension([
             Extension::FIELD__CLASS => ExtensionRepositoryGet::class,
             Extension::FIELD__INTERFACE => IExtensionRepositoryGet::class,
             Extension::FIELD__SUBJECT => '*',
@@ -29,26 +30,11 @@ trait TSnuffExtensions
     }
 
     /**
-     * @param array $repos
-     */
-    protected function addReposForExt(array $repos): void
-    {
-        $repos['snuffRepository'] = SnuffRepository::class;
-
-        foreach ($repos as $interface => $class) {
-            SystemContainer::addItem($interface, $class);
-        }
-
-        $this->createRepoExt(array_keys($repos));
-    }
-
-    /**
      * Delete ext repo
      */
     protected function deleteSnuffExtensions(): void
     {
-        (new ExtensionRepository())->delete([Extension::FIELD__CLASS => [
-            ExtensionRepositoryGet::class
-        ]]);
+        $repo = SystemContainer::getItem('extensions');
+        $repo->drop();
     }
 }

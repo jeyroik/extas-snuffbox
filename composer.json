@@ -9,8 +9,5 @@
     "psr-4": {
       "extas\\": "src/"
     }
-  },
-  "suggest": {
-    "jeyroik/extas-repositories-get": "make available using TSnuffRepository for simple extas-repo manipulating"
   }
 }
