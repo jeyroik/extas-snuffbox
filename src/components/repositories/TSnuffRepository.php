@@ -6,6 +6,7 @@ use extas\components\items\SnuffRepository;
 use extas\components\SystemContainer;
 use extas\interfaces\IItem;
 use extas\interfaces\repositories\IRepository;
+use tests\resources\TBuildRepository;
 
 /**
  * Trait TSnuffRepository
@@ -16,6 +17,7 @@ use extas\interfaces\repositories\IRepository;
 trait TSnuffRepository
 {
     use TSnuffExtensions;
+    use TBuildRepository;
 
     /**
      * @var IRepository[]
@@ -27,16 +29,43 @@ trait TSnuffRepository
      */
     protected function registerSnuffRepos(...$repos): void
     {
-        SystemContainer::addItem('snuffRepository', SnuffRepository::class);
-
         foreach ($repos as $alias) {
+            $this->buildRepo($this->templatesPath, [
+                $alias => [
+                    'namespace' => 'tests\\tmp',
+                    'item_class' => 'extas\\components\\items\\SnuffItem',
+                    'pk' => 'name'
+                ]
+            ]);
             $this->snuffRepos[$alias] = SystemContainer::getItem($alias);
             if (method_exists($this->snuffRepos[$alias], 'drop')) {
                 $this->snuffRepos[$alias]->drop();
             }
         }
+    }
 
-        $this->addReposForExt($repos);
+    protected function registerSnuffReposWithOptions(array $repos): void
+    {
+        foreach ($repos as $alias => $options) {
+            $this->buildRepo($this->templatesPath, [
+                $alias => $options
+            ]);
+            $this->snuffRepos[$alias] = SystemContainer::getItem($alias);
+            if (method_exists($this->snuffRepos[$alias], 'drop')) {
+                $this->snuffRepos[$alias]->drop();
+            }
+        }
+    }
+
+    public function buildBasicRepos(): void
+    {
+        SystemContainer::addItem('snuffRepository', SnuffRepository::class);
+
+        $this->buildPluginsRepo();
+        $this->buildExtensionsRepo();
+
+        $this->snuffRepos['plugins'] = SystemContainer::getItem('plugins');
+        $this->snuffRepos['extensions'] = SystemContainer::getItem('extensions');
     }
 
     /**
@@ -96,6 +125,5 @@ trait TSnuffRepository
         }
 
         $this->snuffRepos = [];
-        $this->deleteSnuffExtensions();
     }
 }
