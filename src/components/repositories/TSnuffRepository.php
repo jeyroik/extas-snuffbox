@@ -25,9 +25,9 @@ trait TSnuffRepository
     /**
      * @param array $repos
      */
-    protected function registerSnuffRepos(array $repos): void
+    protected function registerSnuffRepos(...$repos): void
     {
-        $repos['snuffRepository'] = SnuffRepository::class;
+        SystemContainer::addItem('snuffRepository', SnuffRepository::class);
 
         foreach ($repos as $alias) {
             $this->snuffRepos[$alias] = SystemContainer::getItem($alias);
