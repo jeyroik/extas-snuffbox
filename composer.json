@@ -3,7 +3,7 @@
   "description": "Extas snuffbox",
   "require": {
     "slim/psr7": "^1.1",
-    "symfony/console": "5.*"
+    "symfony/console": "6.*"
   },
   "autoload": {
     "psr-4": {
